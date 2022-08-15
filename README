@@ -1,0 +1,91 @@
+
+I have made a game of Chess with the following features:
+
+* White and black have alternate turns and white moves first
+* Rank and File numbers
+* The most recent move is highlighted 
+* There is a 'flip' board option
+* There are 'Resign' and '1/2' buttons for resigning and accepting a draw respectively
+* '<' button can be used to view all the moves from the start
+* '>' button can be used to navigate forward
+* '^' button takes you back to the latest move
+* 'New Game' can be used to start a new game
+
+
+NOTE: I have NOT restricted the movement of the pieces (any piece can jump anywhere) and haven't 
+programmed special moves like "Castles", "En Passant" and "Promotion". The code also DOESN'T
+check for "Checks", "Checkmates", "Stalemates" etc as all these take too many if else statements
+and is not in the spirit of this lab. 
+
+-------------------------------------------------------
+
+STRUCTURE OF THE CODE:
+
+There is a "Memory" class that stores all the moves made in the current game.
+"Mapping" class has useful member functions that map the buttons/squares on the window to integers that can be used in the code. 
+
+Mapping+Memory+Fl_Widget -> CU (the control unit) -> ChessBoard
+
+CU is an abstract class as draw() and handle() are not implemented.
+CU is the class that stores information about current and previous moves. It has member functions that updates the moves in the 'Memory' and fetch from the Memory if required. It also has many useful functions for its subclass. It also has the art for the pieces. 
+
+ChessBoard is the main class that produces the output. 
+draw_board() and draw_interface() draw the chess board and the surrounding buttons respectively. These both are combined in void draw().
+handle_board() and handle_interface() respectively take care of the events on the board and and in the surrounding interface respectively.
+
+Each type of piece has an integer code. For example white pawn is 1 and black queen is 11.
+w pawn = 1, w bishop = 2, w knight = 3, w rook = 4, w queen = 5, w king = 6. Every black piece has a code = 6+white
+------------------------------------------------------
+
+Details of CU Class:
+
+Protected variables -
+bool whites_move is true if its white's move
+int arrays previous_position and current_position stores the previous position and present position respectively. 
+int piece_white, piece_black, board_white, board_black store the required colours
+int prev_select, prev_drop store the locations on the chess board where the previous move took place (used for highlighting the squares)
+int select, drop store the locations on the chess board where the current move takes place
+int move_number and int display_move respectively display the current move number and the move that display is showing.
+
+Public functions-
+Constructor
+bool check_validity(int i) is the member function that is meant to keep track of rules of chess. BUT THIS IS INCOMPLETE AS IT WOULD TAKE A LOT OF EFFORT TO CODE IT. It just stops from some trivial error
+(like preventing same coloured pieces from capturing)
+void update_position() updated the positions in CU and also in the storage. 
+void next_move() prepares for the next move by resetting some variables.
+void new_game() resets variables for a new game.
+void draw_piece(int i, int id), void pawn(int i, bool white), void bishop(int i, bool white), void knight(int i, bool white), void rook(int i, bool white); void queen(int i, bool white), void king(int i, bool white) draw the pieces. (These are present in the end after the main function as they are unimportant - just aesthetics)
+
+
+----------------------------------------------------
+
+Details of ChessBoard Class:
+
+Variables-
+bool flipped stores whether the board is flipped
+
+Public functions-
+int tile_colour() returns the tile colour taking in the tile ID.
+draw_tile(); draw_coord(); draw_board(); draw_interface() (written after main) do as the say
+handle_board() and handle_interface() handle their respective events
+___________________________________________________
+
+Scope of Expansion:
+
+This code can be modified easily (if we have time) to -
+
+* follow rules
+* add shortcuts to each move (ie. press 1.e4 and you go to first move)
+* add timer (if we have the required library) 
+
+_________________________________________________
+
+I have made only a single widget. Multiple widgets won't work well because all widgets must have a common instance of superclass. I have divided a single widget to function as many buttons.
+ 
+
+      
+
+
+
+
+
