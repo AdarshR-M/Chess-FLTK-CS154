@@ -14,9 +14,7 @@ I have made a game of Chess with the following features:
 
 NOTE: I have NOT restricted the movement of the pieces (any piece can jump anywhere) and haven't 
 programmed special moves like "Castles", "En Passant" and "Promotion". The code also DOESN'T
-check for "Checks", "Checkmates", "Stalemates" etc as all these take too many if else statements
-and is not in the spirit of this lab. 
-
+check for "Checks", "Checkmates", "Stalemates" etc.
 -------------------------------------------------------
 
 STRUCTURE OF THE CODE:
